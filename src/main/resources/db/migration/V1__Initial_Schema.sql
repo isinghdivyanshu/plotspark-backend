@@ -19,7 +19,7 @@ CREATE TABLE password_reset_tokens (
 );
 
 CREATE TABLE refresh_tokens (
-    id UUID PRIMARY KEY DEFAULT uuit_generate_v4(),
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     user_id UUID NOT NULL UNIQUE REFERENCES users(id) ON DELETE CASCADE,
     token_hash VARCHAR(255) NOT NULL UNIQUE ,
     expires_at TIMESTAMPTZ NOT NULL,
@@ -72,7 +72,7 @@ CREATE TABLE canvas_nodes (
     annotation TEXT,
     created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
-)
+);
 
 CREATE INDEX idx_canvas_nodes_canvas_id ON canvas_nodes(canvas_id);
 CREATE INDEX idx_canvas_nodes_element_id ON canvas_nodes(element_id);
@@ -87,7 +87,7 @@ CREATE TABLE canvas_edges (
     type edge_type NOT NULL DEFAULT 'CONTINUES',
     created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
-)
+);
 
 CREATE INDEX idx_canvas_edges_canvas_id ON canvas_edges(canvas_id);
 CREATE INDEX idx_canvas_edges_source_node_id ON canvas_edges(source_node_id);
