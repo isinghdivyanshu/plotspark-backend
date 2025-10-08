@@ -49,6 +49,9 @@ public class Project {
     private List<Canvas> canvases = new ArrayList<>();
 
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Element> elements = new ArrayList<>();
+
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ElementTemplate> elementTemplates = new ArrayList<>();
 
     @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})

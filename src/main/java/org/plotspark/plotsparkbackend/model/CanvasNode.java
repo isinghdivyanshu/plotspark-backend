@@ -52,9 +52,9 @@ public class CanvasNode {
     @Column(name = "updated_at", nullable = false)
     private Instant updatedAt;
 
-    @OneToMany(mappedBy = "sourceNode", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "sourceNode", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CanvasEdge> edgeSources = new ArrayList<>();
 
-    @OneToMany(mappedBy = "targetNode", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "targetNode", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CanvasEdge> edgeTargets = new ArrayList<>();
 }
