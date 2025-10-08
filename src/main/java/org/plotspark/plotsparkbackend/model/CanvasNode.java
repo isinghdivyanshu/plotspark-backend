@@ -40,6 +40,10 @@ public class CanvasNode {
     @Basic(fetch = FetchType.LAZY)
     private String annotation;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "swimlane_id")
+    private Swimlane swimlane;
+
     @CreationTimestamp
     @Column(name = "created_at", nullable = false, updatable = false)
     private Instant createdAt;

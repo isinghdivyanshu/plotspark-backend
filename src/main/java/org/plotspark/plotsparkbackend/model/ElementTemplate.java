@@ -10,14 +10,17 @@ import org.hibernate.annotations.Type;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.Instant;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
-@Table(name = "elements", uniqueConstraints = {@UniqueConstraint(columnNames = {"project_id", "element_template_id", "name"})})
-public class Element {
+@Table(name = "element_templates", uniqueConstraints = {@UniqueConstraint(columnNames = {"project_id", "name"})})
+public class ElementTemplate {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
@@ -26,20 +29,12 @@ public class Element {
     @JoinColumn(name = "project_id", nullable = false)
     private Project project;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "element_template_id", nullable = false)
-    private ElementTemplate elementTemplate;
-
     @Column(nullable = false)
     private String name;
 
     @Type(JsonType.class)
-    @Column(name = "element_details", columnDefinition = "jsonb")
-    private Map<String, Object> elementDetails;
-
-    @Type(JsonType.class)
-    @Column(name = "custom_fields", columnDefinition = "jsonb")
-    private Map<String, Object> customFields;
+    @Column(nullable = false, columnDefinition = "jsonb")
+    private Map<String, Object> schema;
 
     @CreationTimestamp
     @Column(name = "created_at", nullable = false, updatable = false)
@@ -49,6 +44,6 @@ public class Element {
     @Column(name = "updated_at", nullable = false)
     private Instant updatedAt;
 
-    @OneToMany(mappedBy = "element")
-    private List<CanvasNode> canvasNodes = new ArrayList<>();
+    @OneToMany(mappedBy = "elementTemplate")
+    private List<Element> elements = new ArrayList<>();
 }

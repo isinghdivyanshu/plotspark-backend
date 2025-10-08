@@ -50,4 +50,7 @@ public class Canvas {
 
     @OneToMany(mappedBy = "canvas", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CanvasNode> canvasNodes = new ArrayList<>();
+
+    @OneToMany(mappedBy = "canvas", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Swimlane> swimlanes = new ArrayList<>();
 }

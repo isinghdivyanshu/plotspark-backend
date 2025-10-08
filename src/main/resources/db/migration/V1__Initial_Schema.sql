@@ -92,3 +92,4 @@ CREATE TABLE canvas_edges (
 CREATE INDEX idx_canvas_edges_canvas_id ON canvas_edges(canvas_id);
 CREATE INDEX idx_canvas_edges_source_node_id ON canvas_edges(source_node_id);
 CREATE INDEX idx_canvas_edges_target_node_id ON canvas_edges(target_node_id);
+
