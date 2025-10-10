@@ -21,13 +21,11 @@ public class JwtTokenProvider {
 
     private static final Logger logger = LoggerFactory.getLogger(JwtTokenProvider.class);
 
-    private final String accessTokenSecret;
-    private final String accessTokenExpirationMs;
+    private final Long accessTokenExpirationMs;
     private final SecretKey key;
 
     public JwtTokenProvider(@Value("${app.jwt.access-token-secret}") String accessTokenSecret,
-                            @Value("${app.jwt.access-token-expiration-ms}") String accessTokenExpirationMs) {
-        this.accessTokenSecret = accessTokenSecret;
+                            @Value("${app.jwt.access-token-expiration-ms}") Long accessTokenExpirationMs) {
         this.accessTokenExpirationMs = accessTokenExpirationMs;
         this.key = Keys.hmacShaKeyFor(accessTokenSecret.getBytes(StandardCharsets.UTF_8));
     }
